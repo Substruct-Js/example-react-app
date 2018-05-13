@@ -6,7 +6,7 @@ import Container from 'components/Container'
 
 import WelcomeText from './styles/welcome'
 
-class HomePage extends React.Component {
+class AboutPage extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -17,7 +17,7 @@ class HomePage extends React.Component {
 
   componentDidMount () {
     const substruct = new Substruct(SPACE_ID)
-    substruct.collectPage('home', (err, response) => {
+    substruct.collectPage('about', (err, response) => {
       this.setState({ page: response.data.page, content: response.data.content })
     })
   }
@@ -26,9 +26,10 @@ class HomePage extends React.Component {
     return !this.state.page ? (<div>Loading...</div>) : (
       <Container>
         <WelcomeText dangerouslySetInnerHTML={{ __html: this.state.content.text['welcome']}} />
+        <img src={this.state.content.images['logo']} width={100} alt={'LOGO'} />
       </Container>
     )
   }
 }
 
-export default HomePage
+export default AboutPage
