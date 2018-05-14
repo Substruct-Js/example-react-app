@@ -28,8 +28,10 @@ class BlogItem extends React.Component {
   render() {
     return !this.state.page ? (<div>Loading...</div>) : (
       <Container>
-        <WelcomeText dangerouslySetInnerHTML={{ __html: this.state.content.text['intro-text']}} />
-        {this.state.content.images['intro-image'] && (<img width={'100%'} src={this.state.content.images['intro-image']} alt='Intro Image' />)}
+        <WelcomeText dangerouslySetInnerHTML={{ __html: this.state.content.text['intro-text'].content}} />
+        {Object.keys(this.state.content.images).length > 0 && Object.keys(this.state.content.images).map((image, index) => (
+          <img key={index} width={'100%'} src={this.state.content.images['intro-image'].url} alt='Intro Image' />
+        ))}
       </Container>
     )
   }

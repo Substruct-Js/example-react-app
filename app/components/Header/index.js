@@ -17,6 +17,7 @@ export default function Header (props) {
           <li><Link to='/'>Home Page</Link></li>
           <li><Link to='/about'>About Page</Link></li>
           <li><Link to='/blog'>Blog</Link></li>
+          <li><Link to='/gallery'>Gallery</Link></li>
       </Nav>
     </StyledHeader>
   </Container>)

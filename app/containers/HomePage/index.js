@@ -10,7 +10,6 @@ class HomePage extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      page: false,
       content: false
     }
   }
@@ -18,14 +17,14 @@ class HomePage extends React.Component {
   componentDidMount () {
     const substruct = new Substruct(SPACE_ID)
     substruct.collectPage('home', (err, response) => {
-      this.setState({ page: response.data.page, content: response.data.content })
+      this.setState({ content: response.data.content })
     })
   }
 
   render() {
-    return !this.state.page ? (<div>Loading...</div>) : (
+    return !this.state.content ? (<div>Loading...</div>) : (
       <Container>
-        <WelcomeText dangerouslySetInnerHTML={{ __html: this.state.content.text['welcome']}} />
+        <WelcomeText dangerouslySetInnerHTML={{ __html: this.state.content.text['welcome'].content}} />
       </Container>
     )
   }

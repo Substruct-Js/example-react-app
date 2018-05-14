@@ -11,7 +11,6 @@ class BlogPage extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      page: false,
       content: false,
       blogPages: []
     }
@@ -20,7 +19,7 @@ class BlogPage extends React.Component {
   componentDidMount () {
     const substruct = new Substruct(SPACE_ID)
     substruct.collectPage('blog', (err, response) => {
-      this.setState({ page: response.data.page, content: response.data.content })
+      this.setState({ content: response.data.content })
     })
 
     substruct.collectPages((err, response) => {
@@ -29,14 +28,14 @@ class BlogPage extends React.Component {
   }
 
   render() {
-    return !this.state.page ? (<div>Loading...</div>) : (
+    return !this.state.content ? (<div>Loading...</div>) : (
       <Container>
-        <WelcomeText dangerouslySetInnerHTML={{ __html: this.state.content.text['welcome']}} />
+        <WelcomeText dangerouslySetInnerHTML={{ __html: this.state.content.text['welcome'].content}} />
         {this.state.blogPages.length === 0 ? (
           <div>You need to add some pages with the tag of blog</div>
         ) : this.state.blogPages.map((page) => (
           <div>
-            <Link to={`/blog/${page._id}`}>{page.name}</Link>
+            <Link key={page._id} to={`/blog/${page.identifier ? page.identifier : page._id}`}>{page.name}</Link>
           </div>
         ))}
       </Container>
